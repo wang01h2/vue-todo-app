@@ -2,6 +2,7 @@
   "name": "vue-todo-app",
   "private": true,
   "version": "0.0.0",
+  "repository": "https://github.com/wang01h2/vue-todo-app.git",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
