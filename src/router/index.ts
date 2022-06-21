@@ -9,10 +9,7 @@ import Index from '../pages/Index.vue'
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        redirect: '/Index',
-    },
-    {
-        path: '/Index',
+        redirect: '/',
         component: Index
     }
 ]
