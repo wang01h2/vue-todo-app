@@ -1,5 +1,5 @@
 <template>
-  <router-view />
+  <Index />
 </template>
 
 <style>
@@ -9,3 +9,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 </style>
+<script setup lang="ts">
+import Index from "../src/pages/Index.vue";
+
+</script>
