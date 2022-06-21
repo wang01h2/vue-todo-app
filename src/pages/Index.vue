@@ -5,7 +5,6 @@
       <h2 class="text-4xl text-blue-500 text-center mt-6">Todos</h2>
     </div>
   </div>
-
 </template>
 
 <script setup lang="ts">
