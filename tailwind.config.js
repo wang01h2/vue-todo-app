@@ -1,5 +1,6 @@
-//tailwind.config.js
+// tailwind.config.js
 module.exports = {
+  darkMode: 'media',
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
