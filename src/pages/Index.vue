@@ -16,8 +16,10 @@
                 :key-value="item['key']"
                 :label="item['label']"
                 :is-done="item['isDone']"
-                @unselected-click="unselectedEvent"
-                @edit-call-back="editEvent"
+                :delete-show="item['deleteShow']"
+                @unselectedClick="unselectedEvent"
+                @editCallBack="editEvent"
+                @deleteCallBack="deleteEvent"
           ></item>
         </li>
       </ul>
@@ -39,6 +41,7 @@ interface DataType {
   isDone?: boolean,
   keyValue?: string,
   key?: string
+  deleteShow?: boolean
 }
 
 const inputValue = ref('')
@@ -60,16 +63,19 @@ onMounted(() => {
       label: '美好的一天开始啦~ 💃',
       isDone: false,
       keyValue: '003',
+      deleteShow: false,
       key: '003'},
     {
       label: '吃个橙子 🍊️',
       isDone: false,
       keyValue: '002',
+      deleteShow: false,
       key: '002'},
     {
       label: '喝杯咖啡 ☕️',
       isDone: true,
       keyValue: '001',
+      deleteShow: false,
       key: '001'}
   ]
   if(!getData()) {
@@ -82,7 +88,6 @@ onMounted(() => {
 function enterCallBack(data: DataType) {
   // 接收 index组件传递来的对象
   if (data) itemList.value.unshift(data)
-  console.log('enterCallBack', itemList.value)
   setData(itemList.value)
 }
 
@@ -99,13 +104,16 @@ function editEvent(data: DataType) {
   for (let item of itemList.value) {
     if (item.key === data.keyValue) {
       item.label = data.label
+      item.deleteShow = data.deleteShow
     }
   }
+  console.log('触发啦编辑事件')
   setData(itemList.value)
 }
 
 function setData(data: DataType[]) {
   window.localStorage.setItem('todo-data', JSON.stringify(data))
+  itemList.value = getData()
 }
 
 function getData() {
@@ -114,5 +122,12 @@ function getData() {
   } else {
     return false
   }
+}
+
+function deleteEvent(obj: DataType) {
+  itemList.value = itemList.value.filter(item => {
+    return item.key !== obj.keyValue
+  })
+  setData(itemList.value)
 }
 </script>

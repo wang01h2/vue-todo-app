@@ -37,7 +37,8 @@ function inputCallBack() {
   const obj = {
     label: inputValue.value,
     isDone: false,
-    key: Math.round(Math.random() * 900000).toString()
+    key: Math.round(Math.random() * 900000).toString(),
+    deleteShow: false
   }
   // 如果输入了内容才能返回callback
   if (inputValue.value) emits('inputComplete', obj)
