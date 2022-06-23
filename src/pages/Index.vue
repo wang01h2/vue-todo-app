@@ -109,6 +109,11 @@ function setData(data: DataType[]) {
 }
 
 function getData() {
-  return JSON.parse(window.localStorage.getItem('todo-data'))
+  if(window.localStorage.getItem('todo-data')) {
+    return JSON.parse(window.localStorage.getItem('todo-data') as string)
+  } else {
+    return false
+  }
+
 }
 </script>
