@@ -59,8 +59,8 @@ onMounted(() => {
     {
       label: '美好的一天开始啦~ 💃',
       isDone: false,
-      keyValue: '002',
-      key: '002'},
+      keyValue: '003',
+      key: '003'},
     {
       label: '吃个橙子 🍊️',
       isDone: false,
