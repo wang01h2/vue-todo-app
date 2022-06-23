@@ -1,8 +1,8 @@
 <template>
-  <div class="w-screen h-screen bg-gray-50 dark:bg-gray-800">
+  <div class="w-screen h-screen bg-gray-50 dark:bg-gray-900">
     <div class="header-view w-auto h-1/4 flex justify-evenly flex-wrap items-center">
-      <h1 class="text-5xl text-center w-full pt-10 xl:pt-14 2xl:pt-16"> 👋 Hello </h1>
-      <h2 class="text-4xl text-blue-500 text-center w-full">ToDo</h2>
+      <h1 class="text-5xl text-center w-full pt-10 dark:text-white dark:text-opacity-75 xl:pt-14 2xl:pt-16"> 👋 Hello </h1>
+      <h2 class="text-4xl text-blue-500 text-center w-full dark:text-opacity-75">ToDo</h2>
     </div>
     <div class="flex justify-center items-center">
       <index class="w-3/4 h-12 bg-white xl:h-20 xl:w-4/12 2xl:h-20 2xl:w-4/12"

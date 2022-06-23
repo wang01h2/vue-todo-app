@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-start items-center w-full h-full shadow bg-white">
+  <div class="flex justify-start items-center w-full h-full shadow bg-white dark:bg-gray-300">
     <div class="w-1/6 h-2/5 flex justify-center items-center">
       <!--          未选中-->
       <div class="w-5 h-5 border-gray-500 border-solid border-2 rounded-full cursor-pointer" v-if="!isDone" @click="unselected"></div>

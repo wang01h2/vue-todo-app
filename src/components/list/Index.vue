@@ -1,8 +1,8 @@
 <template>
   <div class="index-view">
-    <div class="flex justify-start items-center w-full h-full shadow">
+    <div class="flex justify-start items-center w-full h-full dark:bg-gray-300 shadow">
       <div class="w-1/6 h-2/5 flex justify-center items-center"></div>
-      <input type="text" class="w-4/5 h-4/5 text-gray-600 border border-transparent focus:outline-none text-left text-xl xl:text-4xl" placeholder="需要做些什么?"
+      <input type="text" class="w-4/5 h-4/5 text-gray-600 border border-transparent dark:bg-gray-300 focus:outline-none text-left text-xl xl:text-4xl" placeholder="需要做些什么?"
              v-model.trim="inputValue"
              @keyup.enter="inputCallBack">
     </div>
