@@ -23,8 +23,8 @@
       </ul>
     </div>
     <div class="h-16 mt-12">
-      <p class="text-xs text-gray-300 text-opacity-40 text-center">Hello welcomeTo Todo</p>
-      <p class="text-xs text-gray-300 text-opacity-40 text-center">version: 1.0beta</p>
+      <p class="text-xs text-gray-300 text-opacity-40 text-center">点击编辑待办事项</p>
+      <p class="text-xs text-gray-300 text-opacity-40 text-center">Power by: wang01h2</p>
     </div>
   </div>
 </template>
