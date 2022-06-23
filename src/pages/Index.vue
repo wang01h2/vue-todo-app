@@ -9,14 +9,13 @@
            :input-model="inputValue"
            @input-complete="enterCallBack">
     </index>
-    <div class="flex justify-center items-center flex-col w-5/6 bg-white xl:w-4/12 2xl:w-4/12">
+    <div class="flex justify-center items-center flex-col w-5/6 bg-white xl:w-4/12 2xl:w-4/12" ref="scroll">
       <ul class="w-full">
         <li v-for="item in itemList">
           <item :key="item['key']"
                 :key-value="item['key']"
                 :label="item['label']"
                 :is-done="item['isDone']"
-                :delete-show="item['deleteShow']"
                 @unselectedClick="unselectedEvent"
                 @editCallBack="editEvent"
                 @deleteCallBack="deleteEvent"
@@ -41,7 +40,6 @@ interface DataType {
   isDone?: boolean,
   keyValue?: string,
   key?: string
-  deleteShow?: boolean
 }
 
 const inputValue = ref('')
@@ -63,19 +61,16 @@ onMounted(() => {
       label: '美好的一天开始啦~ 💃',
       isDone: false,
       keyValue: '003',
-      deleteShow: false,
       key: '003'},
     {
       label: '吃个橙子 🍊️',
       isDone: false,
       keyValue: '002',
-      deleteShow: false,
       key: '002'},
     {
       label: '喝杯咖啡 ☕️',
       isDone: true,
       keyValue: '001',
-      deleteShow: false,
       key: '001'}
   ]
   if(!getData()) {
@@ -104,7 +99,6 @@ function editEvent(data: DataType) {
   for (let item of itemList.value) {
     if (item.key === data.keyValue) {
       item.label = data.label
-      item.deleteShow = data.deleteShow
     }
   }
   console.log('触发啦编辑事件')
