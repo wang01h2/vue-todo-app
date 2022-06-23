@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "repository": "https://github.com/wang01h2/vue-todo-app.git",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
