@@ -55,9 +55,9 @@ let itemList = ref<DataType[]>([])
 * */
 
 onMounted(() => {
-  const arr = [
+  const arr: DataType[] = [
     {
-      label: '美好的一天开始啦~ 🌞️',
+      label: '美好的一天开始啦~ 💃',
       isDone: false,
       keyValue: '002',
       key: '002'},
@@ -72,15 +72,19 @@ onMounted(() => {
       keyValue: '001',
       key: '001'}
   ]
-  for (const item of arr) {
-    itemList.value.push(item)
+  if(!getData()) {
+    itemList.value = arr
+  } else {
+    itemList.value = getData()
   }
+
 })
 
 function enterCallBack(data: DataType) {
   // 接收 index组件传递来的对象
   if (data) itemList.value.unshift(data)
   console.log('enterCallBack', itemList.value)
+  setData(itemList.value)
 }
 
 function unselectedEvent(data: DataType) {
@@ -89,6 +93,7 @@ function unselectedEvent(data: DataType) {
       item.isDone = data.isDone
     }
   }
+  setData(itemList.value)
 }
 
 function editEvent(data: DataType) {
@@ -97,5 +102,13 @@ function editEvent(data: DataType) {
       item.label = data.label
     }
   }
+  setData(itemList.value)
+}
+function setData(data: DataType[]) {
+  window.localStorage.setItem('todo-data', JSON.stringify(data))
+}
+
+function getData() {
+  return JSON.parse(window.localStorage.getItem('todo-data'))
 }
 </script>

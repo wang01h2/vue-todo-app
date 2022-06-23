@@ -10,10 +10,10 @@
           v-else @click="unselected"></div>
     </div>
     <span
-        :class="isDone?'line-through w-5/6 truncate text-gray-400 text-left text-2xl xl:text-4xl':'w-5/6 truncate text-gray-600 text-left text-xl xl:text-4xl'"
+        :class="isDone?'line-through w-5/6 truncate text-gray-400 text-left text-2xl xl:text-4xl':'w-5/6 truncate text-gray-600 text-left text-2xl xl:text-4xl'"
         v-if="!edit" @click="labelClick">{{ label }}</span>
     <input type="text"
-           class="w-5/6 text-gray-600 border border-transparent dark:bg-gray-300 focus:outline-none text-left text-xl xl:text-4xl"
+           class="w-5/6 text-gray-600 border border-transparent dark:bg-gray-300 focus:outline-none text-left text-2xl xl:text-4xl"
            v-model="itemData.label"
            v-else
            placeholder="需要做些什么?"
