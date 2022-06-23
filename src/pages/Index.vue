@@ -1,7 +1,8 @@
 <template>
   <div class="todo-view w-screen flex flex-col items-center">
     <div class="header-view w-auto h-56 xl:h-72 2xl:h-72 flex justify-evenly flex-wrap items-center">
-      <h1 class="text-5xl text-center w-full pt-10 dark:text-white dark:text-opacity-75 xl:pt-14 2xl:pt-16"> 👋 Hello </h1>
+      <h1 class="text-5xl text-center w-full pt-10 dark:text-white dark:text-opacity-75 xl:pt-14 2xl:pt-16"> 👋
+        Hello </h1>
       <h2 class="text-4xl text-blue-500 text-center w-full dark:text-opacity-75">ToDo</h2>
     </div>
     <index class="w-3/4 h-12 bg-white xl:h-20 xl:w-4/12 2xl:h-20 2xl:w-4/12"
@@ -16,6 +17,7 @@
                 :label="item['label']"
                 :is-done="item['isDone']"
                 @unselected-click="unselectedEvent"
+                @edit-call-back="editEvent"
           ></item>
         </li>
       </ul>
@@ -30,16 +32,18 @@
 <script setup lang="ts">
 import Index from "../components/list/Index";
 import Item from "../components/list/Item";
-import { ref } from "vue";
+import {ref} from "vue";
 
 interface DataType {
   label?: string,
   isDone?: boolean,
   keyValue?: string,
-  key?: string | number
+  key?: string
 }
+
 const inputValue = ref('')
-let itemList = ref([] as any[])
+let itemList = ref<DataType[]>([])
+
 /*
 * 开始处理逻辑
 * 控制状态
@@ -51,14 +55,23 @@ let itemList = ref([] as any[])
 
 function enterCallBack(data: DataType) {
   // 接收 index组件传递来的对象
-  if(data) itemList.value.unshift(data)
+  if (data) itemList.value.unshift(data)
+  console.log('enterCallBack', itemList.value)
 }
+
 function unselectedEvent(data: DataType) {
   for (let item of itemList.value) {
-    if(item.key === data.keyValue) {
+    if (item.key === data.keyValue) {
       item.isDone = data.isDone
     }
   }
 }
 
+function editEvent(data: DataType) {
+  for (let item of itemList.value) {
+    if (item.key === data.keyValue) {
+      item.label = data.label
+    }
+  }
+}
 </script>
