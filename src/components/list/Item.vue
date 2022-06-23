@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-start items-center h-12 bg-white w-full xl:h-20 2xl:h-20 shadow bg-white dark:bg-gray-300">
+  <div class="flex justify-start items-center h-16 bg-white w-full xl:h-20 2xl:h-20 shadow bg-white dark:bg-gray-300">
     <div class="w-full h-full flex justify-center items-center w-1/6">
       <!--          未选中-->
       <div class="w-5 h-5 border-gray-500 border-solid border-2 rounded-full cursor-pointer xl:w-8 xl:h-8 2xl:w-8 2xl:h-8" v-if="!itemData.isDone"
@@ -10,7 +10,7 @@
           v-else @click="unselected"></div>
     </div>
     <span
-        :class="isDone?'line-through w-5/6 truncate text-gray-400 text-left text-xl xl:text-4xl':'w-5/6 truncate text-gray-600 text-left text-xl xl:text-4xl'"
+        :class="isDone?'line-through w-5/6 truncate text-gray-400 text-left text-2xl xl:text-4xl':'w-5/6 truncate text-gray-600 text-left text-xl xl:text-4xl'"
         v-if="!edit" @click="labelClick">{{ label }}</span>
     <input type="text"
            class="w-5/6 text-gray-600 border border-transparent dark:bg-gray-300 focus:outline-none text-left text-xl xl:text-4xl"

@@ -1,15 +1,15 @@
 <template>
   <div class="todo-view w-screen flex flex-col items-center">
     <div class="header-view w-auto h-56 xl:h-72 2xl:h-72 flex justify-evenly flex-wrap items-center">
-      <h1 class="text-5xl text-center w-full pt-10 dark:text-white dark:text-opacity-75 xl:pt-14 2xl:pt-16"> 👋
+      <h1 class="text-6xl text-center w-full pt-10 dark:text-white dark:text-opacity-75 xl:pt-14 2xl:pt-16"> 👋
         Hello </h1>
-      <h2 class="text-4xl text-blue-500 text-center w-full dark:text-opacity-75">ToDo</h2>
+      <h2 class="text-5xl text-blue-500 text-center w-full dark:text-opacity-75">ToDo</h2>
     </div>
-    <index class="w-3/4 h-12 bg-white xl:h-20 xl:w-4/12 2xl:h-20 2xl:w-4/12"
+    <index class="w-5/6 h-16 bg-white xl:h-20 xl:w-4/12 2xl:h-20 2xl:w-4/12"
            :input-model="inputValue"
            @input-complete="enterCallBack">
     </index>
-    <div class="flex justify-center items-center flex-col w-3/4 bg-white xl:w-4/12 2xl:w-4/12">
+    <div class="flex justify-center items-center flex-col w-5/6 bg-white xl:w-4/12 2xl:w-4/12">
       <ul class="w-full">
         <li v-for="item in itemList">
           <item :key="item['key']"
@@ -56,6 +56,11 @@ let itemList = ref<DataType[]>([])
 
 onMounted(() => {
   const arr = [
+    {
+      label: '美好的一天开始啦~ 🌞️',
+      isDone: false,
+      keyValue: '002',
+      key: '002'},
     {
       label: '吃个橙子 🍊️',
       isDone: false,
