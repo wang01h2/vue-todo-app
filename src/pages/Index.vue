@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import Index from "../components/list/Index";
 import Item from "../components/list/Item";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
 interface DataType {
   label?: string,
@@ -53,6 +53,24 @@ let itemList = ref<DataType[]>([])
 * @unselected-click: 完成事项事件
 * @edit-call-back: 编辑代办事项事件
 * */
+
+onMounted(() => {
+  const arr = [
+    {
+      label: '吃橙子 🍊️',
+      isDone: false,
+      keyValue: '002',
+      key: '002'},
+    {
+      label: '喝咖啡 ☕️',
+      isDone: true,
+      keyValue: '001',
+      key: '001'}
+  ]
+  for (const item of arr) {
+    itemList.value.push(item)
+  }
+})
 
 function enterCallBack(data: DataType) {
   // 接收 index组件传递来的对象
