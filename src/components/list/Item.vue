@@ -17,6 +17,7 @@
            v-model="itemData.label"
            v-else
            placeholder="需要做些什么?"
+           @blur="editCallBack"
            @keyup.enter="editCallBack">
   </div>
 </template>
