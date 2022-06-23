@@ -6,7 +6,6 @@
              v-model.trim="inputValue"
              @keyup.enter="inputCallBack">
     </div>
-    <slot></slot>
   </div>
 </template>
 

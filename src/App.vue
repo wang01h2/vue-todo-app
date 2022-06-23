@@ -11,5 +11,10 @@
 </style>
 <script setup lang="ts">
 import Index from "../src/pages/Index.vue";
-
 </script>
+
+<style>
+body {
+  background-color: #F9FAFB;
+}
+</style>
