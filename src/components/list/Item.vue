@@ -1,8 +1,8 @@
 <template>
-  <div class="flex justify-start items-center h-12 bg-white w-full 2xl:h-20 2xl:h-20 shadow bg-white dark:bg-gray-300">
+  <div class="flex justify-start items-center h-12 bg-white w-full xl:h-20 2xl:h-20 shadow bg-white dark:bg-gray-300">
     <div class="w-full h-full flex justify-center items-center w-1/6">
       <!--          未选中-->
-      <div class="w-5 h-5 border-gray-500 border-solid border-2 rounded-full cursor-pointer" v-if="!itemData.isDone"
+      <div class="w-5 h-5 border-gray-500 border-solid border-2 rounded-full cursor-pointer xl:w-8 xl:h-8 2xl:w-8 2xl:h-8" v-if="!itemData.isDone"
            @click="unselected"></div>
       <!--            选中-->
       <div
