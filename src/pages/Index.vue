@@ -11,10 +11,10 @@
 <!--        item list-->
         <item v-if="itemList.length > 0"
               v-for="item in itemList"
-              :key="item.key"
-              :key-value="item.key"
-              :label="item.label"
-              :is-done="item.isDone"
+              :key="item['key']"
+              :key-value="item['key']"
+              :label="item['label']"
+              :is-done="item['isDone']"
               @unselected-click="unselectedEvent"
         ></item>
       </index>
