@@ -5,18 +5,18 @@
       <h2 class="text-4xl text-blue-500 text-center w-full">ToDo</h2>
     </div>
     <div class="flex justify-center items-center">
-      <index class="w-3/4 h-12 flex justify-center shadow bg-white xl:h-20 xl:w-4/12 2xl:h-20 2xl:w-4/12">
-        <div class="flex justify-start items-center w-full">
-          <div class="w-1/6 h-2/5 flex justify-center items-center">
-            <!--          未选中-->
-            <div class="w-5 h-5 border-gray-500 border-solid border-2 rounded-full cursor-pointer" v-show="false"></div>
-<!--            选中-->
-            <div class="w-5 h-5 ring-gray-200 bg-gray-500 border-gray-200 border-solid border-4 rounded-full cursor-pointer xl:w-10 xl:h-10 xl:border-8"></div>
-          </div>
-          <span class="line-through truncate text-gray-400 text-left text-xl xl:text-4xl">早睡早起</span>
-          <input type="text" class="line-through w-4/5 h-4/5 text-gray-600 border border-transparent focus:outline-none text-xl" placeholder="需要做些什么?" v-show="false">
-        </div>
-<!--        <item class="w-full"></item>-->
+      <index class="w-3/4 h-12 bg-white xl:h-20 xl:w-4/12 2xl:h-20 2xl:w-4/12"
+             :input-model="inputValue"
+             @input-complete="enterCallBack">
+<!--        item list-->
+        <item v-if="itemList.length > 0"
+              v-for="item in itemList"
+              :key="item.key"
+              :key-value="item.key"
+              :label="item.label"
+              :is-done="item.isDone"
+              @unselected-click="unselectedEvent"
+        ></item>
       </index>
     </div>
   </div>
@@ -25,5 +25,29 @@
 <script setup lang="ts">
 import Index from "../components/list/Index";
 import Item from "../components/list/Item";
+import {ref} from "vue";
+
+const inputValue = ref('')
+let itemList = ref([])
+/*
+* 开始处理逻辑
+* 控制状态
+* :inputModel: 输入绑定数据，string类型
+* :isDone: 是否点击了完成 boolean
+* 事件：
+* @unselected-click: 完成事项事件
+* */
+
+function enterCallBack(data: object) {
+  // 接收 index组件传递来的对象
+  if(data) itemList.value.unshift(data)
+}
+function unselectedEvent(data: object) {
+  for (let item of itemList.value) {
+    if(item.key === data.keyValue) {
+      item.isDone = data.isDone
+    }
+  }
+}
 
 </script>
