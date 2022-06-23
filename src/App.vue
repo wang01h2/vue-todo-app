@@ -14,6 +14,15 @@ import Index from "../src/pages/Index.vue";
 </script>
 
 <style>
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: #101827;
+
+  }
+  .todo-view {
+    background-color: #101827;
+  }
+}
 body {
   background-color: #F9FAFB;
 }
