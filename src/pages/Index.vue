@@ -104,6 +104,7 @@ function editEvent(data: DataType) {
   }
   setData(itemList.value)
 }
+
 function setData(data: DataType[]) {
   window.localStorage.setItem('todo-data', JSON.stringify(data))
 }
@@ -114,6 +115,5 @@ function getData() {
   } else {
     return false
   }
-
 }
 </script>
