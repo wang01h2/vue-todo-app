@@ -9,9 +9,8 @@
              :input-model="inputValue"
              @input-complete="enterCallBack">
 <!--        item list-->
-        <item v-if="itemList.length > 0"
-              v-for="item in itemList"
-              :key="item['key']"
+        <item v-for="item in itemList"
+              :key="item.key"
               :key-value="item['key']"
               :label="item['label']"
               :is-done="item['isDone']"
