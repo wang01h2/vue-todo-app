@@ -57,12 +57,12 @@ let itemList = ref<DataType[]>([])
 onMounted(() => {
   const arr = [
     {
-      label: '吃橙子 🍊️',
+      label: '吃个橙子 🍊️',
       isDone: false,
       keyValue: '002',
       key: '002'},
     {
-      label: '喝咖啡 ☕️',
+      label: '喝杯咖啡 ☕️',
       isDone: true,
       keyValue: '001',
       key: '001'}
