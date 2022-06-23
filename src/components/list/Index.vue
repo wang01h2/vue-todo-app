@@ -8,7 +8,7 @@
              v-model.trim="inputValue"
              @change="inputChange = true"
              @keyup.enter="inputCallBack">
-        <button class="w-1/6 h-full text-gray-500 text-center select-none focus:outline-none focus:ring-green-500 focus:ring text-2xl xl:text-4xl"
+        <button class="w-1/6 h-full text-gray-500 text-center select-none text-2xl xl:text-4xl"
                 v-if="inputChange"
                 @click="inputCallBack">+</button>
     </div>
