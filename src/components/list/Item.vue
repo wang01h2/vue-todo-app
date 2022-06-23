@@ -58,8 +58,7 @@ function labelClick() {
   edit.value = !edit.value
 }
 
-function editCallBack(msg: string) {
-  console.log(msg)
+function editCallBack() {
   if (edit.value) {
     if (itemData.label) {
       edit.value = !edit.value
