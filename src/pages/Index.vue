@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import Index from "../components/list/Index";
 import Item from "../components/list/Item";
-import {ref} from "vue";
+import { ref } from "vue";
 
 const inputValue = ref('')
 let itemList = ref([])
