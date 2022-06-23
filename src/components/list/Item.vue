@@ -17,8 +17,9 @@
            v-model="itemData.label"
            v-else
            placeholder="需要做些什么?"
+           @change="editCallBack"
            @blur="editCallBack"
-           @keyup.enter="editCallBack">
+           @keydown.enter="editCallBack">
   </div>
 </template>
 
@@ -33,6 +34,7 @@ interface Props {
 }
 
 let edit = ref(false)
+let editValue = ref(false)
 const props = defineProps<Props>()
 const itemData = reactive<Props>({
   label: props.label,
@@ -51,7 +53,11 @@ function labelClick() {
 }
 
 function editCallBack() {
-  if (itemData.label) emits('editCallBack', itemData)
-  edit.value = !edit.value
+  if(edit.value) {
+    if (itemData.label) emits('editCallBack', itemData)
+    edit.value = !edit.value
+  } else {
+    edit.value = false
+  }
 }
 </script>
