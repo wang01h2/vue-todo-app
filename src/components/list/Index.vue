@@ -1,12 +1,16 @@
 <template>
   <div class="index-view">
     <div class="flex justify-start items-center w-full h-full dark:bg-gray-300 shadow">
-      <div class="w-1/6 h-2/5 flex justify-center items-center"></div>
+      <div class="w-1/6 h-2/5 select-none"></div>
       <input type="text"
-             class="w-4/5 h-4/5 text-gray-600 border border-transparent dark:bg-gray-300 focus:outline-none text-left text-2xl xl:text-4xl"
+             class="w-4/6 h-4/5 text-gray-600 border border-transparent dark:bg-gray-300 focus:outline-none text-left text-2xl xl:text-4xl 2xl:text-4xl"
              placeholder="需要做些什么?"
              v-model.trim="inputValue"
+             @change="inputChange = true"
              @keyup.enter="inputCallBack">
+        <button class="w-1/6 h-full text-gray-500 text-center select-none focus:outline-none focus:ring-green-500 focus:ring text-2xl xl:text-4xl"
+                v-if="inputChange"
+                @click="inputCallBack">+</button>
     </div>
   </div>
 </template>
@@ -20,6 +24,7 @@ interface Props {
 
 const props = defineProps<Props>()
 let inputValue = ref('')
+let inputChange = ref(false)
 const emits = defineEmits(['inputComplete'])
 watch(
     () => props.inputModel,
@@ -37,5 +42,6 @@ function inputCallBack() {
   // 如果输入了内容才能返回callback
   if (inputValue.value) emits('inputComplete', obj)
   inputValue.value = ''
+  inputChange.value = false
 }
 </script>
