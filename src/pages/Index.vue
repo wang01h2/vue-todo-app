@@ -26,9 +26,14 @@
 import Index from "../components/list/Index";
 import Item from "../components/list/Item";
 import { ref } from "vue";
-
+interface Props {
+  label?: string,
+  isDone?: boolean,
+  keyValue?: string,
+  key?: string | number
+}
 const inputValue = ref('')
-let itemList = ref([])
+let itemList = ref([] as any[])
 /*
 * 开始处理逻辑
 * 控制状态
