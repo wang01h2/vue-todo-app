@@ -11,9 +11,9 @@
 <!--        item list-->
         <item v-for="item in itemList"
               :key="item.key"
-              :key-value="item['key']"
-              :label="item['label']"
-              :is-done="item['isDone']"
+              :key-value="item.key"
+              :label="item.label"
+              :is-done="item.isDone"
               @unselected-click="unselectedEvent"
         ></item>
       </index>
