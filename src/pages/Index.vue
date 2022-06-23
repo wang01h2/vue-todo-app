@@ -77,7 +77,6 @@ onMounted(() => {
   } else {
     itemList.value = getData()
   }
-
 })
 
 function enterCallBack(data: DataType) {
