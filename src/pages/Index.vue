@@ -23,7 +23,7 @@
       </ul>
     </div>
     <div class="h-16 mt-12">
-      <p class="text-xs text-gray-300 text-opacity-40 text-center">点击编辑待办事项</p>
+      <p class="text-xs text-gray-300 text-opacity-40 text-center">双击编辑待办事项</p>
       <p class="text-xs text-gray-300 text-opacity-40 text-center">Power by: wang01h2</p>
     </div>
   </div>
@@ -51,6 +51,7 @@ let itemList = ref<DataType[]>([])
 * :isDone: 是否点击了完成 boolean
 * 事件：
 * @unselected-click: 完成事项事件
+* @edit-call-back: 编辑代办事项事件
 * */
 
 function enterCallBack(data: DataType) {
