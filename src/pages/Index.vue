@@ -10,10 +10,10 @@
              @input-complete="enterCallBack">
 <!--        item list-->
         <item v-for="item in itemList"
-              :key="item.key"
-              :key-value="item.key"
-              :label="item.label"
-              :is-done="item.isDone"
+              :key="item['key']"
+              :key-value="item['key']"
+              :label="item['label']"
+              :is-done="item['isDone']"
               @unselected-click="unselectedEvent"
         ></item>
       </index>
@@ -25,7 +25,7 @@
 import Index from "../components/list/Index";
 import Item from "../components/list/Item";
 import { ref } from "vue";
-interface Props {
+interface DataType {
   label?: string,
   isDone?: boolean,
   keyValue?: string,
@@ -42,11 +42,11 @@ let itemList = ref([] as any[])
 * @unselected-click: 完成事项事件
 * */
 
-function enterCallBack(data: object) {
+function enterCallBack(data: DataType) {
   // 接收 index组件传递来的对象
   if(data) itemList.value.unshift(data)
 }
-function unselectedEvent(data: object) {
+function unselectedEvent(data: DataType) {
   for (let item of itemList.value) {
     if(item.key === data.keyValue) {
       item.isDone = data.isDone
