@@ -34,7 +34,6 @@ interface Props {
 }
 
 let edit = ref(false)
-let editValue = ref(false)
 const props = defineProps<Props>()
 const itemData = reactive<Props>({
   label: props.label,
@@ -53,7 +52,7 @@ function labelClick() {
 }
 
 function editCallBack() {
-  if(edit.value) {
+  if (edit.value) {
     if (itemData.label) emits('editCallBack', itemData)
     edit.value = !edit.value
   } else {
