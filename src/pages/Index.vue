@@ -107,19 +107,24 @@ function enterCallBack(data: DataType) {
 * */
 function unselectedEvent(data: DataType, name: string) {
   if(name === 'todo-data') {
+    // 把点击的数据添加的到完成的list中
     itemDoneList.value.unshift(data)
+    // 从未完成的数据中删除此数据
     itemList.value = itemList.value.filter(item => {
       return item.key !== data.keyValue
     })
+    // 保存到本地
+    setData(itemDoneList.value, 'todo-done-data')
+    setData(itemList.value, name)
   } else {
     itemList.value.unshift(data)
     itemDoneList.value = itemDoneList.value.filter(item => {
       return item.key !== data.keyValue
     })
+    // 保存数据
+    setData(itemList.value, 'todo-data')
+    setData(itemDoneList.value, name)
   }
-  // 保存数据
-  setData(itemDoneList.value, 'todo-done-data')
-  setData(itemList.value, 'todo-data')
 }
 /*
 * 只有未完成的才能够编辑
@@ -137,7 +142,6 @@ function editEvent(data: DataType) {
 /*
 * name: localstorage中的key
 * */
-
 function setData(data: DataType[], name: string) {
   window.localStorage.setItem(name, JSON.stringify(data))
 }
@@ -149,11 +153,13 @@ function getData(name: string) {
     return false
   }
 }
-
+/*
+* 只有已完成的才能删除，所以只删除已完成的数据
+* */
 function deleteEvent(obj: DataType, name: string) {
-  itemList.value = itemList.value.filter(item => {
+  itemDoneList.value = itemDoneList.value.filter(item => {
     return item.key !== obj.keyValue
   })
-  setData(itemList.value, name)
+  setData(itemDoneList.value, name)
 }
 </script>
