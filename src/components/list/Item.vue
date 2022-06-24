@@ -22,10 +22,10 @@
            @blur="editCallBack"
            @change="editCallBack"
            @keydown.enter="editCallBack" />
-    <div class="w-1/6 bg-red-400 bg-opacity-75 h-full z-50 flex justify-center items-center cursor-pointer"
+    <div class="w-1/6 h-full z-50 flex justify-center items-center cursor-pointer"
          v-if="itemData.isDone && !edit"
          @click="deleteCallBack">
-      <p class="text-white text-opacity-75 select-none">删除</p>
+      <p class="text-red-400 text-opacity-75 select-none">删除</p>
     </div>
   </div>
 </template>
