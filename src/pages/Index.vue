@@ -109,7 +109,7 @@ function enterCallBack(data: DataType) {
 * name: localstorage中的key
 * */
 function unselectedEvent(data: DataType) {
-  todos.value.forEach(item => {
+  todos.value.forEach((item: DataType) => {
     if(item.key === data.keyValue) item.isDone = !item.isDone
   })
   SAVE()
@@ -131,7 +131,7 @@ function editEvent(data: DataType) {
 * 只有已完成的才能删除，所以只删除已完成的数据
 * */
 function deleteEvent(obj: DataType) {
-  todos.value.forEach((item, index) => {
+  todos.value.forEach((item: DataType, index: number) => {
     if(item.key === obj.keyValue) todos.value.splice(index, 1)
   })
   SAVE()
