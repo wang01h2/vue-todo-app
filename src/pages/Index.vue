@@ -16,7 +16,7 @@
                 :key-value="item['key']"
                 :label="item['label']"
                 :is-done="item['isDone']"
-                @unselectedClick="unselectedEvent($event, 'todo-data')"
+                @unselectedClick="unselectedEvent"
                 @editCallBack="editEvent"
           ></item>
         </li>
@@ -27,7 +27,7 @@
                 :key-value="item['key']"
                 :label="item['label']"
                 :is-done="item['isDone']"
-                @unselectedClick="unselectedEvent($event, 'todo-done-data')"
+                @unselectedClick="unselectedEvent"
                 @deleteCallBack="deleteEvent"
           ></item>
         </li>
@@ -108,7 +108,7 @@ function enterCallBack(data: DataType) {
 * 目前的思路是，如果 = true,把这个item放到已关闭的数组中，自然而然在下面
 * name: localstorage中的key
 * */
-function unselectedEvent(data: DataType, name: string) {
+function unselectedEvent(data: DataType) {
   todos.value.forEach(item => {
     if(item.key === data.keyValue) item.isDone = !item.isDone
   })
