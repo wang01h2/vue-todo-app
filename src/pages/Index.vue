@@ -95,7 +95,7 @@ onMounted(() => {
       key: '001'}
   ]
   // 如果数据不存在，初始化
-  if(!todos.value) setData(arr, STORAGE_KEY)
+  if(todos.value.length === 0) setData(arr, STORAGE_KEY)
 })
 
 function enterCallBack(data: DataType) {
