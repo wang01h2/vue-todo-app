@@ -16,7 +16,19 @@
                 :key-value="item['key']"
                 :label="item['label']"
                 :is-done="item['isDone']"
-                @unselectedClick="unselectedEvent"
+                @unselectedClick="unselectedEvent($event, 'todo-data')"
+                @editCallBack="editEvent"
+                @deleteCallBack="deleteEvent"
+          ></item>
+        </li>
+      </ul>
+      <ul class="w-full">
+        <li v-for="item in itemDoneList">
+          <item :key="item['key']"
+                :key-value="item['key']"
+                :label="item['label']"
+                :is-done="item['isDone']"
+                @unselectedClick="unselectedEvent($event, 'todo-done-data')"
                 @editCallBack="editEvent"
                 @deleteCallBack="deleteEvent"
           ></item>
@@ -44,6 +56,7 @@ interface DataType {
 
 const inputValue = ref('')
 let itemList = ref<DataType[]>([])
+let itemDoneList = ref<DataType[]>([])
 
 /*
 * 开始处理逻辑
@@ -66,35 +79,51 @@ onMounted(() => {
       label: '吃个橙子 🍊️',
       isDone: false,
       keyValue: '002',
-      key: '002'},
+      key: '002'}
+  ]
+  const done: DataType[] = [
     {
       label: '喝杯咖啡 ☕️',
       isDone: true,
       keyValue: '001',
       key: '001'}
   ]
-  if(!getData()) {
+  if(!getData('todo-data') && !getData('todo-done-data')) {
     itemList.value = arr
+    itemDoneList.value = done
   } else {
-    itemList.value = getData()
+    itemList.value = getData('todo-data')
+    itemDoneList.value = getData('todo-done-data')
   }
 })
 
 function enterCallBack(data: DataType) {
   // 接收 index组件传递来的对象
   if (data) itemList.value.unshift(data)
-  setData(itemList.value)
+  setData(itemList.value, 'todo-data')
 }
 
-function unselectedEvent(data: DataType) {
-  for (let item of itemList.value) {
-    if (item.key === data.keyValue) {
-      item.isDone = data.isDone
-    }
+/*
+* 目前的思路是，如果 = true,把这个item放到已关闭的数组中，自然而然在下面
+* name: localstorage中的key
+* */
+function unselectedEvent(data: DataType, name: string) {
+  if(name === 'todo-data') {
+    itemDoneList.value.unshift(data)
+    itemList.value = itemList.value.filter(item => {
+      return item.key !== data.keyValue
+    })
+  } else {
+    itemList.value.unshift(data)
+    itemDoneList.value = itemDoneList.value.filter(item => {
+      return item.key !== data.keyValue
+    })
   }
-  setData(itemList.value)
+  setData(itemList.value, name)
 }
-
+/*
+* 只有未完成的才能够编辑
+* */
 function editEvent(data: DataType) {
   for (let item of itemList.value) {
     if (item.key === data.keyValue) {
@@ -102,17 +131,20 @@ function editEvent(data: DataType) {
     }
   }
   console.log('触发啦编辑事件')
-  setData(itemList.value)
+  setData(itemList.value,'todo-data')
 }
 
-function setData(data: DataType[]) {
-  window.localStorage.setItem('todo-data', JSON.stringify(data))
-  itemList.value = getData()
+/*
+* name: localstorage中的key
+* */
+
+function setData(data: DataType[], name: string) {
+  window.localStorage.setItem(name, JSON.stringify(data))
 }
 
-function getData() {
-  if(window.localStorage.getItem('todo-data')) {
-    return JSON.parse(window.localStorage.getItem('todo-data') as string)
+function getData(name: string) {
+  if(window.localStorage.getItem(name)) {
+    return JSON.parse(window.localStorage.getItem(name) as string)
   } else {
     return false
   }

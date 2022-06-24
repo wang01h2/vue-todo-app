@@ -56,6 +56,7 @@ function unselected() {
 }
 
 function labelClick() {
+  if (itemData.isDone) return
   edit.value = !edit.value
 }
 
