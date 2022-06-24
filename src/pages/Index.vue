@@ -11,7 +11,7 @@
     </index>
     <div class="flex justify-center items-center flex-col w-5/6 bg-white xl:w-4/12 2xl:w-4/12" ref="scroll">
       <ul class="w-full">
-        <li v-for="item in itemList">
+        <li v-for="item in uncompletedList">
           <item :key="item['key']"
                 :key-value="item['key']"
                 :label="item['label']"
@@ -22,20 +22,20 @@
         </li>
       </ul>
       <ul class="w-full">
-        <li v-for="item in itemDoneList">
+        <li v-for="item in completedList">
           <item :key="item['key']"
                 :key-value="item['key']"
                 :label="item['label']"
                 :is-done="item['isDone']"
                 @unselectedClick="unselectedEvent($event, 'todo-done-data')"
-                @deleteCallBack="deleteEvent($event, 'todo-done-data')"
+                @deleteCallBack="deleteEvent"
           ></item>
         </li>
       </ul>
     </div>
     <div class="h-16 mt-12">
-      <p class="text-xs text-gray-300 text-opacity-40 text-center dark:text-gray-400 dark:text-opacity-10">双击编辑待办事项</p>
-      <p class="text-xs text-gray-300 text-opacity-40 text-center dark:text-gray-400 dark:text-opacity-10">Power by: wang01h2</p>
+      <p class="text-xs text-gray-300 text-opacity-40 text-center select-none dark:text-gray-400 dark:text-opacity-10">双击编辑待办事项</p>
+      <p class="text-xs text-gray-300 text-opacity-40 text-center select-none dark:text-gray-400 dark:text-opacity-10">Power by: wang01h2</p>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@
 <script setup lang="ts">
 import Index from "../components/list/Index";
 import Item from "../components/list/Item";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 
 interface DataType {
   label?: string,
@@ -51,11 +51,21 @@ interface DataType {
   keyValue?: string,
   key?: string
 }
-
+const STORAGE_KEY = 'todo-data'
 const inputValue = ref('')
-let itemList = ref<DataType[]>([])
-let itemDoneList = ref<DataType[]>([])
 
+const filters = {
+  all: (todos) => todos,
+  uncompleted: (todos) => todos.filter((todo) => !todo.isDone),
+  completed: (todos) => todos.filter((todo) => todo.isDone)
+}
+// state
+const todos = ref(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'))
+const visibility = ref("all")
+// derived state
+// const all = computed(() => filters[visibility.value](todos.value))
+const completedList = computed(() => filters.completed(todos.value))
+const uncompletedList = computed(() => filters.uncompleted(todos.value))
 /*
 * 开始处理逻辑
 * 控制状态
@@ -77,28 +87,21 @@ onMounted(() => {
       label: '吃个橙子 🍊️',
       isDone: false,
       keyValue: '002',
-      key: '002'}
-  ]
-  const done: DataType[] = [
+      key: '002'},
     {
       label: '喝杯咖啡 ☕️',
       isDone: true,
       keyValue: '001',
       key: '001'}
   ]
-  if(!getData('todo-data') && !getData('todo-done-data')) {
-    itemList.value = arr
-    itemDoneList.value = done
-  } else {
-    itemList.value = getData('todo-data')
-    itemDoneList.value = getData('todo-done-data')
-  }
+  // 如果数据不存在，初始化
+  if(!todos.value) setData(arr, STORAGE_KEY)
 })
 
 function enterCallBack(data: DataType) {
   // 接收 index组件传递来的对象
-  if (data) itemList.value.unshift(data)
-  setData(itemList.value, 'todo-data')
+  if (data) todos.value.unshift(data)
+  SAVE()
 }
 
 /*
@@ -106,37 +109,32 @@ function enterCallBack(data: DataType) {
 * name: localstorage中的key
 * */
 function unselectedEvent(data: DataType, name: string) {
-  if(name === 'todo-data') {
-    // 把点击的数据添加的到完成的list中
-    itemDoneList.value.unshift(data)
-    // 从未完成的数据中删除此数据
-    itemList.value = itemList.value.filter(item => {
-      return item.key !== data.keyValue
-    })
-    // 保存到本地
-    setData(itemDoneList.value, 'todo-done-data')
-    setData(itemList.value, name)
-  } else {
-    itemList.value.unshift(data)
-    itemDoneList.value = itemDoneList.value.filter(item => {
-      return item.key !== data.keyValue
-    })
-    // 保存数据
-    setData(itemList.value, 'todo-data')
-    setData(itemDoneList.value, name)
-  }
+  todos.value.forEach(item => {
+    if(item.key === data.keyValue) item.isDone = !item.isDone
+  })
+  SAVE()
 }
 /*
 * 只有未完成的才能够编辑
 * */
 function editEvent(data: DataType) {
-  for (let item of itemList.value) {
+  for (let item of todos.value) {
     if (item.key === data.keyValue) {
       item.label = data.label
     }
   }
   console.log('触发啦编辑事件')
-  setData(itemList.value,'todo-data')
+  SAVE()
+}
+
+/*
+* 只有已完成的才能删除，所以只删除已完成的数据
+* */
+function deleteEvent(obj: DataType) {
+  todos.value.forEach((item, index) => {
+    if(item.key === obj.keyValue) todos.value.splice(index, 1)
+  })
+  SAVE()
 }
 
 /*
@@ -146,20 +144,7 @@ function setData(data: DataType[], name: string) {
   window.localStorage.setItem(name, JSON.stringify(data))
 }
 
-function getData(name: string) {
-  if(window.localStorage.getItem(name)) {
-    return JSON.parse(window.localStorage.getItem(name) as string)
-  } else {
-    return false
-  }
-}
-/*
-* 只有已完成的才能删除，所以只删除已完成的数据
-* */
-function deleteEvent(obj: DataType, name: string) {
-  itemDoneList.value = itemDoneList.value.filter(item => {
-    return item.key !== obj.keyValue
-  })
-  setData(itemDoneList.value, name)
+function SAVE() {
+  setData(todos.value, STORAGE_KEY)
 }
 </script>
