@@ -55,9 +55,9 @@ const STORAGE_KEY = 'todo-data'
 const inputValue = ref('')
 
 const filters = {
-  all: (todos) => todos,
-  uncompleted: (todos) => todos.filter((todo) => !todo.isDone),
-  completed: (todos) => todos.filter((todo) => todo.isDone)
+  all: (todos: DataType[]) => todos,
+  uncompleted: (todos: DataType[]) => todos.filter((todo) => !todo.isDone),
+  completed: (todos: DataType[]) => todos.filter((todo) => todo.isDone)
 }
 // state
 const todos = ref(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'))
