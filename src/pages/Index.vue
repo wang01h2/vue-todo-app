@@ -18,7 +18,6 @@
                 :is-done="item['isDone']"
                 @unselectedClick="unselectedEvent($event, 'todo-data')"
                 @editCallBack="editEvent"
-                @deleteCallBack="deleteEvent"
           ></item>
         </li>
       </ul>
@@ -29,8 +28,7 @@
                 :label="item['label']"
                 :is-done="item['isDone']"
                 @unselectedClick="unselectedEvent($event, 'todo-done-data')"
-                @editCallBack="editEvent"
-                @deleteCallBack="deleteEvent"
+                @deleteCallBack="deleteEvent($event, 'todo-done-data')"
           ></item>
         </li>
       </ul>
@@ -119,7 +117,9 @@ function unselectedEvent(data: DataType, name: string) {
       return item.key !== data.keyValue
     })
   }
-  setData(itemList.value, name)
+  // 保存数据
+  setData(itemDoneList.value, 'todo-done-data')
+  setData(itemList.value, 'todo-data')
 }
 /*
 * 只有未完成的才能够编辑
@@ -150,10 +150,10 @@ function getData(name: string) {
   }
 }
 
-function deleteEvent(obj: DataType) {
+function deleteEvent(obj: DataType, name: string) {
   itemList.value = itemList.value.filter(item => {
     return item.key !== obj.keyValue
   })
-  setData(itemList.value)
+  setData(itemList.value, name)
 }
 </script>
