@@ -158,7 +158,7 @@ function SAVE() {
         双击编辑待办事项
       </p>
       <p class="text-xs text-gray-300 text-opacity-40 text-center select-none dark:text-gray-400 dark:text-opacity-10">
-        Power by: wang01h2
+        Power by: Vue.js
       </p>
     </div>
   </div>
