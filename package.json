@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@antfu/eslint-config": "^0.25.2",
+    "eslint": "^8.18.0",
     "vue": "^3.2.25"
   },
   "devDependencies": {
