@@ -62,8 +62,7 @@ onMounted(() => {
 
 function enterCallBack(data: DataType) {
   // 接收 index组件传递来的对象
-  if (data)
-    todos.value.unshift(data)
+  todos.value.unshift(data)
   SAVE()
 }
 
