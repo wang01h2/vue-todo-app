@@ -23,4 +23,4 @@
 
 ### LICENSE
 
-MIT, Copyright (c) 2022 Hongbusi.
+MIT, Copyright (c) 2022 wang01h2.

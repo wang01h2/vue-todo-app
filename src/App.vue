@@ -1,5 +1,9 @@
+<script setup lang="ts">
+import Index from '../src/pages/Index.vue'
+</script>
+
 <template>
-  <Index/>
+  <Index />
 </template>
 
 <style>
@@ -24,6 +28,3 @@ body {
   background-color: #F9FAFB;
 }
 </style>
-<script setup lang="ts">
-import Index from "../src/pages/Index.vue";
-</script>
