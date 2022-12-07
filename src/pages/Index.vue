@@ -122,7 +122,7 @@ function SAVE() {
         ToDo
       </h2>
     </div>
-    <index
+    <Index
       class="w-5/6 h-16 bg-white xl:h-20 xl:w-4/12 2xl:h-20 2xl:w-4/12"
       :input-model="inputValue"
       @input-complete="enterCallBack"
@@ -130,7 +130,7 @@ function SAVE() {
     <div ref="scroll" class="flex justify-center items-center flex-col w-5/6 bg-white xl:w-4/12 2xl:w-4/12">
       <ul class="w-full">
         <li v-for="item in uncompletedList" :key="item.key">
-          <item
+          <Item
             :key="item.key"
             :key-value="item.key"
             :label="item.label"
@@ -142,7 +142,7 @@ function SAVE() {
       </ul>
       <ul class="w-full">
         <li v-for="item in completedList" :key="item.key">
-          <item
+          <Item
             :key="item.key"
             :key-value="item.key"
             :label="item.label"

@@ -32,7 +32,7 @@ function inputCallBack() {
 
 <template>
   <div class="index-view">
-    <div class="flex justify-start items-center w-full h-full dark:bg-gray-300 shadow">
+    <div data-cy="input" class="flex justify-start items-center w-full h-full dark:bg-gray-300 shadow">
       <div class="w-1/6 h-2/5 select-none" />
       <input
         v-model.trim="inputValue"
