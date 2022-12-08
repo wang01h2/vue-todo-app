@@ -1,8 +1,10 @@
+import { mount } from 'cypress/vue'
 import Index from './Index.vue'
-import '../assets/css/tailwindcss.css'
+import 'tailwindcss/tailwind.css'
+
 describe('<Index />', () => {
   it('renders', () => {
     // see: https://test-utils.vuejs.org/guide/
-    cy.mount(Index)
+    mount(Index)
   })
 })
