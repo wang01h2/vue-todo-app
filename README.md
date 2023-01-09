@@ -20,6 +20,11 @@
 
 ### 感谢朋友们的帮助
 
+TODO:
+1. pinia
+2. router
+3. vitest
+4. version 2.0
 
 ### LICENSE
 
