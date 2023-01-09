@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import Index from '../src/pages/Index.vue'
+// import Index from '../src/pages/Index.vue'
 </script>
 
 <template>
-  <Index />
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 
 <style>

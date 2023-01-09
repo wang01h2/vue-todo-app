@@ -5,7 +5,7 @@ const Index = () => import('../pages/Index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
+    path: '/vue-todo-app/',
     name: 'index',
     component: Index,
   },
